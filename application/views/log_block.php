@@ -1,0 +1,1 @@
+<div  id="log_block">{log_block} </div>
