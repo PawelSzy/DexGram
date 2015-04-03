@@ -100,16 +100,15 @@ h1 a {
       }
 
 .image_div {
-    width: 50%;
+  /*Aby ustawic pozycje obrazu na srodek */
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
 .zdjecie_srednie {
+  width: 100%;
   padding: 1em;
-
-
-
-  background-color: green;
+  background: linear-gradient(to bottom right, #DCDDDE, #E0E1E2); 
 }
 
 @media screen and (max-width:500px) {
@@ -161,7 +160,7 @@ h1 a {
   font-size: 0.8em;
   width: 100%;
   background: linear-gradient(to bottom right, #EDEEEF , #EDEEEF);
-  background-color: #F2F2F2;
+  /*background-color: #F2F2F2; */
   margin-top: 0.25em;
 }
 

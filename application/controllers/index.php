@@ -14,6 +14,12 @@ include 'wyswietl_tresc_trait.php';
 			$this->load->helper('typography');
 			$this->load->helper('url');
 			$this->load->helper('html');
+
+			?>
+ 			<script type="text/javascript">
+ 				var js_base_url = '<?php echo base_url() ; //musi byc zaladowany "url_helper" aby uzyc tej funckji?>';	
+ 			</script>
+			<?php			
 		}
 
 		public function index($page_name ="")
@@ -50,6 +56,7 @@ include 'wyswietl_tresc_trait.php';
 			$data['artykul_id'] = $data[$page_name][0]['id'];
 			#$data['boczny_pasek'] = ' <input type="submit" class="przycisk" name="nowa_strona" value="Nowa strona"  >' ;
 
+
 			foreach ($data[$page_name] as $artykul) 
 			{
 				$text = auto_typography($artykul['tekst']);
@@ -69,14 +76,18 @@ include 'wyswietl_tresc_trait.php';
 
 		private function main_page() 
 		{
-
 			define("ILOSC_ARTYKULOW_NA_GLOWNEJ", 5);
 
 			$data['title'] = "LightCMS Pawel test";
  			$data['content'] = "";
- 			$adres_obrazu = base_url('image/');
- 			$adres_obrazu .="/obraz.jpg";
-			$data['content'] .= $this->utworz_div_obrazu($adres_obrazu);
+ 			$nazwy_obrazow = ['obraz.jpg','zielony.jpg'];
+ 			foreach ($nazwy_obrazow as $obraz) {
+	 			$adres_obrazu = base_url('image/');
+	 			$adres_obrazu .="/".$obraz;
+				$data['content'] .= $this->utworz_div_obrazu($adres_obrazu);
+ 			}
+
+ 
 
 			// $artykuly = $this->artykuly->pobierz_artykuly(ILOSC_ARTYKULOW_NA_GLOWNEJ);
 
@@ -109,4 +120,34 @@ include 'wyswietl_tresc_trait.php';
 
 	}
 
-?>
+?>			
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" >
+</script>
+<script type="text/javascript">
+// var getJson = $.getJSON("baza_images.js", function(image_data){
+// 	console.log("Json");
+// });
+
+var wyswietl_obrazy = function(key, data) {
+	var wyswietl_obraz = function(row) {
+		console.log($.parseJSON(row));
+	};
+	console.log(data[1]);
+	$.each(data,wyswietl_obraz);
+	
+}
+
+$(document).ready(function(){
+	console.log("ready");
+	console.log(base_url);
+	$.getJSON(base_url +"js/baza_images.js", function(data){
+		$.each(data, wyswietl_obrazy);
+	}).fail(function( jqxhr, textStatus, error ) {
+                    var err = textStatus + ', ' + error;
+                    console.log( "Request Failed: " + err);
+              });
+
+	console.log("ready2");
+})
+
+</script>
