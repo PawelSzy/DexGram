@@ -80,12 +80,12 @@ include 'wyswietl_tresc_trait.php';
 
 			$data['title'] = "LightCMS Pawel test";
  			$data['content'] = "";
- 			$nazwy_obrazow = ['obraz.jpg','zielony.jpg'];
- 			foreach ($nazwy_obrazow as $obraz) {
-	 			$adres_obrazu = base_url('image/');
-	 			$adres_obrazu .="/".$obraz;
-				$data['content'] .= $this->utworz_div_obrazu($adres_obrazu);
- 			}
+ 			// $nazwy_obrazow = ['obraz.jpg','zielony.jpg'];
+ 			// foreach ($nazwy_obrazow as $obraz) {
+	 		// 	$adres_obrazu = base_url('image/');
+	 		// 	$adres_obrazu .="/".$obraz;
+				// $data['content'] .= $this->utworz_div_obrazu($adres_obrazu);
+ 			// }
 
  
 
@@ -132,17 +132,18 @@ var utworz_div_obrazu = function(adres) {
 	return "<div class='image_div'>"+"<img src="+"'"+adres+"'"+"class ='zdjecie_srednie'>"+"</div>";	
 }
 
+var wyswietl_obraz = function(row, data) {
+	var div =  utworz_div_obrazu( js_base_url +"/image/"+ data.nazwa_pliku );
+	$("#tresc").append(div);
+};
+
 var wyswietl_obrazy = function(key, data) {
-	var wyswietl_obraz = function(row, data) {
-		console.log( utworz_div_obrazu( js_base_url + data.nazwa_pliku ));
-	};
-	console.log(data);
+	//console.log(data);
 	$.each(data,wyswietl_obraz);	
 }
 
 $(document).ready(function(){
-	console.log("ready");
-	console.log(js_base_url);
+	//console.log("ready");
 	//js_base_url musi byc zdefiniowane w srodku php controlera - aby skorzystac 
 	// helpera base_url()
 	$.getJSON(js_base_url +"js/baza_images.js", function(data){
@@ -150,9 +151,9 @@ $(document).ready(function(){
 	}).fail(function( jqxhr, textStatus, error ) {
                     var err = textStatus + ', ' + error;
                     console.log( "Request Failed: " + err);
-              });
+         });
 
-	console.log("ready2");
+	//console.log("ready2");
 })
 
 </script>
