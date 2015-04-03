@@ -128,19 +128,24 @@ include 'wyswietl_tresc_trait.php';
 // 	console.log("Json");
 // });
 
+var utworz_div_obrazu = function(adres) {
+	return "<div class='image_div'>"+"<img src="+"'"+adres+"'"+"class ='zdjecie_srednie'>"+"</div>";	
+}
+
 var wyswietl_obrazy = function(key, data) {
-	var wyswietl_obraz = function(row) {
-		console.log($.parseJSON(row));
+	var wyswietl_obraz = function(row, data) {
+		console.log( utworz_div_obrazu( js_base_url + data.nazwa_pliku ));
 	};
-	console.log(data[1]);
-	$.each(data,wyswietl_obraz);
-	
+	console.log(data);
+	$.each(data,wyswietl_obraz);	
 }
 
 $(document).ready(function(){
 	console.log("ready");
-	console.log(base_url);
-	$.getJSON(base_url +"js/baza_images.js", function(data){
+	console.log(js_base_url);
+	//js_base_url musi byc zdefiniowane w srodku php controlera - aby skorzystac 
+	// helpera base_url()
+	$.getJSON(js_base_url +"js/baza_images.js", function(data){
 		$.each(data, wyswietl_obrazy);
 	}).fail(function( jqxhr, textStatus, error ) {
                     var err = textStatus + ', ' + error;
