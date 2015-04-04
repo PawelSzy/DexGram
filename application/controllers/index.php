@@ -13,13 +13,7 @@ include 'wyswietl_tresc_trait.php';
 			#$this->load->model('artykuly');
 			$this->load->helper('typography');
 			$this->load->helper('url');
-			$this->load->helper('html');
-
-			?>
- 			<script type="text/javascript">
- 				var js_base_url = '<?php echo base_url() ; //musi byc zaladowany "url_helper" aby uzyc tej funckji?>';	
- 			</script>
-			<?php			
+			$this->load->helper('html');	
 		}
 
 		public function index($page_name ="")
@@ -128,12 +122,22 @@ include 'wyswietl_tresc_trait.php';
 // 	console.log("Json");
 // });
 
+
+//////////////////// CREATE URL helpers /////////////////////////////////////////////	
+	var url_pliku_glownego ="index.php/"
+	var page_url = window.location.href;
+	var base_url =  page_url.substr(0, page_url.lastIndexOf("index.php/"));
+	var url_subpage = page_url.substr(page_url.lastIndexOf("index.php/") +"index.php/".length);
+	var koncowka_url = page_url.substr(page_url.lastIndexOf('index.php/'))
+
+//////////////////// End of CREATE URL helpers /////////////////////////////////////////////
+
 var utworz_div_obrazu = function(adres) {
 	return "<div class='image_div'>"+"<img src="+"'"+adres+"'"+"class ='zdjecie_srednie'>"+"</div>";	
 }
 
 var wyswietl_obraz = function(row, data) {
-	var div =  utworz_div_obrazu( js_base_url +"/image/"+ data.nazwa_pliku );
+	var div =  utworz_div_obrazu( base_url +"/image/"+ data.nazwa_pliku );
 	$("#tresc").append(div);
 };
 
@@ -142,16 +146,30 @@ var wyswietl_obrazy = function(key, data) {
 	$.each(data,wyswietl_obraz);	
 }
 
+
 $(document).ready(function(){
-	//console.log("ready");
-	//js_base_url musi byc zdefiniowane w srodku php controlera - aby skorzystac 
-	// helpera base_url()
-	$.getJSON(js_base_url +"js/baza_images.js", function(data){
+	console.log("subpage "+url_subpage);
+	if (url_subpage === "index" || url_subpage === "index/" ){
+		//glowna strona
+		$.getJSON(base_url +"js/baza_images.js", function(data){
 		$.each(data, wyswietl_obrazy);
 	}).fail(function( jqxhr, textStatus, error ) {
                     var err = textStatus + ', ' + error;
                     console.log( "Request Failed: " + err);
+         });	
+	} else {
+		//podstrona
+		console.log("podstrona");
+		$.getJSON(base_url +"js/baza_images.js", function(data){
+			console.log(data);
+			$.each(data, wyswietl_obrazy);
+		}).fail(function( jqxhr, textStatus, error ) {
+                    var err = textStatus + ', ' + error;
+                    console.log( "Request Failed: " + err);
          });
+	}
+
+
 
 	//console.log("ready2");
 })

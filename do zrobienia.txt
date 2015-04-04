@@ -1,0 +1,6 @@
+
+
+
+-------------------------
+Przeniesc kod do oddzielnego pliku
+stworz w php controlers ktory pobiera dane z model i zmienia na JSNO
