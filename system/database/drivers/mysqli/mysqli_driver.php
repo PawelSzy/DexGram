@@ -70,11 +70,11 @@ class CI_DB_mysqli_driver extends CI_DB {
 	{
 		if ($this->port != '')
 		{
-			return @mysqli_connect($this->hostname, $this->username, $this->password, $this->database, $this->port);
+			return mysqli_connect($this->hostname, $this->username, $this->password, $this->database, $this->port);
 		}
 		else
 		{
-			return @mysqli_connect($this->hostname, $this->username, $this->password, $this->database);
+			return mysqli_connect($this->hostname, $this->username, $this->password, $this->database);
 		}
 
 	}

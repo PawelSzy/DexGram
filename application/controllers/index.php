@@ -70,10 +70,12 @@ include 'wyswietl_tresc_trait.php';
 
 		private function main_page() 
 		{
-			define("ILOSC_ARTYKULOW_NA_GLOWNEJ", 5);
+			define("ILOSC_OBRAZOW_NA_GLOWNEJ", 5);
 
-			$data['title'] = "LightCMS Pawel test";
+			$data['title'] = "DexGram Pawel test";
  			$data['content'] = "";
+
+
  			// $nazwy_obrazow = ['obraz.jpg','zielony.jpg'];
  			// foreach ($nazwy_obrazow as $obraz) {
 	 		// 	$adres_obrazu = base_url('image/');
@@ -151,7 +153,9 @@ $(document).ready(function(){
 	console.log("subpage "+url_subpage);
 	if (url_subpage === "index" || url_subpage === "index/" ){
 		//glowna strona
-		$.getJSON(base_url +"js/baza_images.js", function(data){
+		$.getJSON(base_url + "index.php/" +"pobierz_info_o_obrazie_JSON", function(data){
+		// $.getJSON(base_url +"js/baza_images.js", function(data){
+		console.log(data);
 		$.each(data, wyswietl_obrazy);
 	}).fail(function( jqxhr, textStatus, error ) {
                     var err = textStatus + ', ' + error;
@@ -160,9 +164,12 @@ $(document).ready(function(){
 	} else {
 		//podstrona
 		console.log("podstrona");
-		$.getJSON(base_url +"js/baza_images.js", function(data){
+		//$.getJSON(base_url +"js/baza_images.js", function(data){
+		$.getJSON(base_url + "index.php/"+"pobierz_info_o_obrazie_JSON", function(data){
+			
 			console.log(data);
 			$.each(data, wyswietl_obrazy);
+
 		}).fail(function( jqxhr, textStatus, error ) {
                     var err = textStatus + ', ' + error;
                     console.log( "Request Failed: " + err);
