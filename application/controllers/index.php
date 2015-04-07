@@ -126,11 +126,12 @@ include 'wyswietl_tresc_trait.php';
 
 
 //////////////////// CREATE URL helpers /////////////////////////////////////////////	
-	var url_pliku_glownego ="index.php/"
+	var url_pliku_glownego ="index.php"
+
 	var page_url = window.location.href;
-	var base_url =  page_url.substr(0, page_url.lastIndexOf("index.php/"));
-	var url_subpage = page_url.substr(page_url.lastIndexOf("index.php/") +"index.php/".length);
-	var koncowka_url = page_url.substr(page_url.lastIndexOf('index.php/'))
+	var base_url =  page_url.substr(0, page_url.lastIndexOf(url_pliku_glownego));
+	var url_subpage = page_url.substr(page_url.lastIndexOf(url_pliku_glownego) +url_pliku_glownego.length);
+	var koncowka_url = page_url.substr(page_url.lastIndexOf(url_pliku_glownego))
 
 //////////////////// End of CREATE URL helpers /////////////////////////////////////////////
 
@@ -139,12 +140,22 @@ var utworz_div_obrazu = function(adres) {
 }
 
 var wyswietl_obraz = function(row, data) {
-	var div =  utworz_div_obrazu( base_url +"/image/"+ data.nazwa_pliku );
+	//console.log("data.id " + data[0]);
+	if (data.czy_lokalny === "1") {
+		var div =  utworz_div_obrazu( base_url +"image/"+ data.nazwa_pliku+"."+ data.rozszerzenie );
+	} else {
+		var div =  utworz_div_obrazu( data.url_pliku );
+	}
+	;
+
+	//console.log("div "+div)
 	$("#tresc").append(div);
 };
 
-var wyswietl_obrazy = function(key, data) {
-	//console.log(data);
+var wyswietl_obrazy = function(data) {
+	console.log(window.location.href);
+	console.log("koncowka_url", koncowka_url);
+	console.log(data);
 	$.each(data,wyswietl_obraz);	
 }
 
@@ -168,7 +179,8 @@ $(document).ready(function(){
 		$.getJSON(base_url + "index.php/"+"pobierz_info_o_obrazie_JSON", function(data){
 			
 			console.log(data);
-			$.each(data, wyswietl_obrazy);
+			wyswietl_obrazy(data);
+			//$.each(data, wyswietl_obrazy);
 
 		}).fail(function( jqxhr, textStatus, error ) {
                     var err = textStatus + ', ' + error;
