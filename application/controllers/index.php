@@ -38,32 +38,32 @@ include 'wyswietl_tresc_trait.php';
  			$data['content'] = "";
 
 
-			$data[$page_name] = $this->artykuly->pobierz_artykul($page_name);
+/*			$data[$page_name] = $this->artykuly->pobierz_artykul($page_name);
 
 			if ( empty($data[$page_name]) )
 			{
 				show_404();
 				return;
-			} 
+			} */
 
-			$data['title'] = $data[$page_name][0]['tytul'];
-			$data['artykul_id'] = $data[$page_name][0]['id'];
-			#$data['boczny_pasek'] = ' <input type="submit" class="przycisk" name="nowa_strona" value="Nowa strona"  >' ;
+			// $data['title'] = $data[$page_name][0]['tytul'];
+			// $data['artykul_id'] = $data[$page_name][0]['id'];
+			// #$data['boczny_pasek'] = ' <input type="submit" class="przycisk" name="nowa_strona" value="Nowa strona"  >' ;
 
 
-			foreach ($data[$page_name] as $artykul) 
-			{
-				$text = auto_typography($artykul['tekst']);
+			// foreach ($data[$page_name] as $artykul) 
+			// {
+			// 	$text = auto_typography($artykul['tekst']);
 				
-				$autor =$artykul['autor'];
-				$tytul = $artykul['tytul'];
-				$this->load->helper('url');
+			// 	$autor =$artykul['autor'];
+			// 	$tytul = $artykul['tytul'];
+			// 	$this->load->helper('url');
 
-				$data['content'] = $data['content']."<h1>".$tytul."</h1>";
-				$data['content'] = $data['content'].$text;
-    	        $data['content'] = $data['content']."<br>"."Autor:"."<br>".$autor."<br>";
-    	        $data['content'] = $data['content']."<hr>";
-			}
+			// 	$data['content'] = $data['content']."<h1>".$tytul."</h1>";
+			// 	$data['content'] = $data['content'].$text;
+   //  	        $data['content'] = $data['content']."<br>"."Autor:"."<br>".$autor."<br>";
+   //  	        $data['content'] = $data['content']."<hr>";
+			// }
 
 			$this->wyswietl_tresc( $data); //zaladowany trait wyswietl tresc
 		}
@@ -127,11 +127,14 @@ include 'wyswietl_tresc_trait.php';
 
 //////////////////// CREATE URL helpers /////////////////////////////////////////////	
 	var url_pliku_glownego ="index.php"
+	var url_do_podstrony = url_pliku_glownego+"/index/index"
 
 	var page_url = window.location.href;
 	var base_url =  page_url.substr(0, page_url.lastIndexOf(url_pliku_glownego));
 	var url_subpage = page_url.substr(page_url.lastIndexOf(url_pliku_glownego) +url_pliku_glownego.length);
 	var koncowka_url = page_url.substr(page_url.lastIndexOf(url_pliku_glownego))
+	var podstrona = page_url.substr(page_url.lastIndexOf(url_do_podstrony)+url_do_podstrony.length+1)
+
 
 //////////////////// End of CREATE URL helpers /////////////////////////////////////////////
 
@@ -161,16 +164,17 @@ var wyswietl_obrazy = function(data) {
 
 
 $(document).ready(function(){
+	console.log("page_url", page_url)
 	console.log("subpage "+url_subpage);
 	console.log("url_subpage", url_subpage);
 	console.log("koncowka_url", koncowka_url);
+	console.log("url_do_podstrony", url_do_podstrony);
+	console.log("podstrona", podstrona);
 
-
-	if (koncowka_url === url_pliku_glownego || koncowka_url === url_pliku_glownego+"/" || koncowka_url === url_pliku_glownego + "/index" ){
+	if (koncowka_url == url_pliku_glownego || koncowka_url == url_pliku_glownego+"/" || koncowka_url == url_pliku_glownego + "/index" ){
 		//glowna strona
 		console.log("glowna_strona");
 		$.getJSON(base_url + "index.php/" +"pobierz_info_o_obrazie_JSON", function(data){
-		// $.getJSON(base_url +"js/baza_images.js", function(data){
 		wyswietl_obrazy(data);
 	}).fail(function( jqxhr, textStatus, error ) {
                     var err = textStatus + ', ' + error;
@@ -179,8 +183,9 @@ $(document).ready(function(){
 	} else {
 		//podstrona
 		console.log("podstrona");
-		//$.getJSON(base_url +"js/baza_images.js", function(data){
-		$.getJSON(base_url + "index.php/"+"pobierz_info_o_obrazie_JSON", function(data){
+		html_do_przeslania = base_url + "index.php/"+"pobierz_info_o_obrazie_JSON" + "/index/"+ podstrona;
+		$.getJSON(html_do_przeslania, function(data){
+			
 			wyswietl_obrazy(data);
 			//$.each(data, wyswietl_obrazy);
 

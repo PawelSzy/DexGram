@@ -30,7 +30,7 @@ class Obrazy extends CI_Model
 	public function pobierz_obraz( $nazwa_obrazu ) 
 	{
 
-		$this->db->where('tytul',urldecode($nazwa_obrazu));
+		$this->db->where('nazwa_pliku',urldecode($nazwa_obrazu));
 		$query = $this->db->get('obrazy');
 		$return_array = $this->dodaj_autora_do_tabeli( $query->result_array() );
 		return $return_array;	
