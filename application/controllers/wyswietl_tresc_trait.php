@@ -71,7 +71,8 @@ trait wyswietl_tresc_trait {
 		if ( isset( $preg_split[1] )) {
 			$nazwa_artykulu = $preg_split[1];
 			$tworz_przycisk_usun = True;
-			$tworz_przycisk_edytuj = True;
+			// $tworz_przycisk_edytuj = True;			
+			$tworz_przycisk_edytuj = False;
 		} else {
 			$nazwa_artykulu = "";
 			$tworz_przycisk_edytuj = False;
