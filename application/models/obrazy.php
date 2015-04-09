@@ -73,7 +73,7 @@ class Obrazy extends CI_Model
 
 	public function usun_obraz( $id ) 
 	{
-		$this->db->delete( 'obrazy', array( 'tytul' => $id )); 
+		$this->db->delete( 'obrazy', array( 'nazwa_pliku' => $id )); 
 	}
 
 
