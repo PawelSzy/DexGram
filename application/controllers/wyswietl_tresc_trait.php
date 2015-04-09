@@ -37,7 +37,7 @@ trait wyswietl_tresc_trait {
 			$login_info = $nowy_uzytkownik." ".$zaloguj ; 
 			
 
-			if ( $this->session->userdata('login') === false )
+			if ( $this->session->userdata('autor') === false )
 			{
 				//Uzytkownik niezalogowany
 				$log_block = "";
@@ -49,7 +49,7 @@ trait wyswietl_tresc_trait {
 				$wyloguj = anchor( "/wyloguj/", "wyloguj" );
 				$log_block = "";
 				$log_block = $log_block."Witaj: ";
-				$log_block = $log_block.( $this->session->userdata('login') );
+				$log_block = $log_block.( $this->session->userdata('autor') );
 				$log_block = $log_block.$wyloguj;
 
 			}
