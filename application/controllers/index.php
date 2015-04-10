@@ -158,8 +158,8 @@ var utworz_div_obrazu = function(adres, alt, url) {
 var wyswietl_obraz = function(row, data) {
 	var url = base_url + url_do_podstrony +"/"+ data.nazwa_pliku;
 
-	if (data.czy_lokalny === "1") {
-		var adres_zdjecie = base_url +"image/"+ data.nazwa_pliku+"."+ data.rozszerzenie;
+	if (data.czy_lokalny === 1) {
+		var adres_zdjecie = base_url +"image/"+ data.nazwa_pliku+ data.rozszerzenie;
 	} else {
 		var adres_zdjecie = data.url_pliku;
 	};

@@ -3,4 +3,5 @@
 
 -------------------------
 Przeniesc kod do oddzielnego pliku
-stworz w php controlers ktory pobiera dane z model i zmienia na JSNO
+Pobierz i dodaj nowe obrazy
+Wyswietlaj nowe obrazy po logowaniu

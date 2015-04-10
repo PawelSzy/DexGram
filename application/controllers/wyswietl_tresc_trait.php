@@ -81,11 +81,11 @@ trait wyswietl_tresc_trait {
 		}	
 
 		// utworz url ktor prowadzi do controlera edytuj i usun artykul
-		$edytuj_action = base_url()."index.php/edytuj/index/".$nazwa_artykulu."";
+		$edytuj_action = base_url()."index.php/nowa_strona/index/".$nazwa_artykulu."";
 		$usun_action = base_url()."index.php/usun_artykul/index/".$nazwa_artykulu."";
 
 		$przyciski_div1 = "
-		<form method='post' action=".base_url()."index.php/edytuj/index/>
+		<form method='post' action=".base_url()."index.php/nowa_strona/index/>
   			<input type='submit' class='przycisk' name='nowa_strona' value='Nowa strona'  >
         </form>" ;
         $przyciski_div2 = NULL;
