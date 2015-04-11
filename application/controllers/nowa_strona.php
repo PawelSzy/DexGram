@@ -110,13 +110,15 @@
 						$zapisz_plik_config = $this->upload_data();
 						//var_dump($zapisz_plik_config);
 						//return;
+						$zapisana_nazwa = $zapisz_plik_config["upload_data"]['raw_name'];
+						$rozszerzenie = $zapisz_plik_config["upload_data"]['file_ext'];
 						$dane_zapis_pliku = array 
 						(
-							'url_pliku' 	=> base_url()."image/".$zapisz_plik_config["upload_data"]['client_name'],
+							'url_pliku' 	=> base_url()."image/".$zapisana_nazwa.$rozszerzenie,
 							'id_autora' 	=> $this->session->userdata('autor_id'), 
-							'nazwa_pliku' 	=> $zapisz_plik_config["upload_data"]['raw_name'],
+							'nazwa_pliku' 	=> $zapisana_nazwa,
 							"czy_lokalny"	=> 1,
-							"rozszerzenie" 	=> $zapisz_plik_config["upload_data"]['file_ext']
+							"rozszerzenie" 	=> $rozszerzenie,
 							//'tekst'	=> $this->input->post('tresc')
 						);
 						$obraz = array_merge($obraz, $dane_zapis_pliku);
@@ -184,7 +186,7 @@
 	 		if ( ! $this->upload->do_upload())
 			{
 				$error = array('error' => $this->upload->display_errors());
-				echo $error;
+				var_dump($error);
 				//$this->load->view('upload_form', $error);
 				return;
 			}
@@ -203,7 +205,7 @@
  			$data['przycisk_zapisz_akcja_do_wykonania'] = base_url()."index.php/nowa_strona/zapisz/".$page_name;
  			
  			//utworz przycisk edytuj
- 			$data['header'] = anchor("", "LightCMS" );
+ 			$data['header'] = anchor("", "DexGram" );
 
 			$this->parser->parse('head', $data);
 			$this->load->view('body_start');

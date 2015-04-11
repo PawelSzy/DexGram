@@ -3,4 +3,11 @@
 
 -------------------------
 Przeniesc kod do oddzielnego pliku
-Usun obrazy z folderu image gdy naciskam usun
+Pobierz nowe dane przy skrolowaniu
+	zapisuje plik z polskimi literami
+
+$(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+           // ajax call get data from server and append to the div
+    }
+});

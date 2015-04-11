@@ -5,7 +5,7 @@
 	<div>
 	{wyswietl_blad}
 	</div>
-	<form class="form_vraper" action='{przycisk_zapisz_akcja_do_wykonania}' method='post' accept-charset="utf-8"  enctype="multipart/form-data">
+	<form class="form_vraper"  name="userfile"  action='{przycisk_zapisz_akcja_do_wykonania}' method='post' accept-charset="utf-8"  enctype="multipart/form-data">
 		<?php echo validation_errors();?>
 
 		Pobierz plik:<br>
