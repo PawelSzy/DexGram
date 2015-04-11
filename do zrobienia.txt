@@ -3,5 +3,4 @@
 
 -------------------------
 Przeniesc kod do oddzielnego pliku
-Pobierz i dodaj nowe obrazy
-Wyswietlaj nowe obrazy po logowaniu
+Usun obrazy z folderu image gdy naciskam usun

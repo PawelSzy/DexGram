@@ -108,7 +108,7 @@
 					else 
 					{	// utworz nowa strone
 						$zapisz_plik_config = $this->upload_data();
-						var_dump($zapisz_plik_config);
+						//var_dump($zapisz_plik_config);
 						//return;
 						$dane_zapis_pliku = array 
 						(
@@ -184,7 +184,7 @@
 	 		if ( ! $this->upload->do_upload())
 			{
 				$error = array('error' => $this->upload->display_errors());
-				var_dump($error);
+				echo $error;
 				//$this->load->view('upload_form', $error);
 				return;
 			}

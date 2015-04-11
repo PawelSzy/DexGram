@@ -38,7 +38,7 @@ class Obrazy extends CI_Model
 
 	public function pobierz_id_autora_obrazu ( $nazwa_obrazu )
 	{
-		$this->db->where('tytul',urldecode($nazwa_obrazu));
+		$this->db->where('nazwa_pliku',urldecode($nazwa_obrazu));
 		$this->db->select('id_autora');
 		$query = $this->db->get('obrazy');
 
@@ -71,9 +71,27 @@ class Obrazy extends CI_Model
 		$this->db->update('obrazy', $dane['obraz']);
 	}
 
-	public function usun_obraz( $id ) 
+	public function usun_obraz( $nazwa_pliku ) 
 	{
-		$this->db->delete( 'obrazy', array( 'nazwa_pliku' => $id )); 
+		
+		
+
+		//usun plik z folderu image
+		$this->load->helper("file");
+		$this->load->helper("url");
+		$path = $this->podaj_path_do_foldera_image();
+		$rozszerzenie = $this->podaj_rozszerzenie_pliku($nazwa_pliku);
+		$path_do_pliku = $path."/".$nazwa_pliku.$rozszerzenie;
+		
+		// var_dump($path_do_pliku);
+		if(unlink($path_do_pliku)) {
+		     echo 'Usunieto obraz ';
+		     //usun z bazy danych
+		     $this->db->delete( 'obrazy', array( 'nazwa_pliku' => $nazwa_pliku )); 
+		}
+		else {
+		     echo 'errors occured';
+		}
 	}
 
 
@@ -83,6 +101,26 @@ class Obrazy extends CI_Model
 		$this->db->where( 'id', $id );
 		$query = $this->db->get('autorzy');
 		return $query->result_array()[0]['autor']  ;
+	}
+
+	private function podaj_path_do_foldera_image()
+	{
+		$root = $_SERVER['DOCUMENT_ROOT'];
+		$script_name = 	$_SERVER['SCRIPT_NAME'];
+		$folder_path =  str_replace("/index.php", '', $script_name); 
+		$image_path = "/image";
+		$path = $root.$folder_path.$image_path;
+		return $path;
+
+	}
+
+	private function podaj_rozszerzenie_pliku($nazwa_obrazu)
+	{
+		$this->db->where('nazwa_pliku',urldecode($nazwa_obrazu));
+		$this->db->select('rozszerzenie');
+		$query = $this->db->get('obrazy');
+
+		return $query->result_array()[0]['rozszerzenie'];		
 	}
 
 	private function dodaj_autora_do_tabeli( $tabela )
