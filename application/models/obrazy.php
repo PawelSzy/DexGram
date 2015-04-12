@@ -12,15 +12,16 @@ class Obrazy extends CI_Model
 		$this->load->database();
 	}
 
-	public function pobierz_obrazy( $ilosc_obrazow=0 )
+	public function pobierz_obrazy( $ilosc_obrazow=0, $offset = 0 )
 	{
 
 		
 		$this->db->order_by("data", "desc"); 
 		if ( $ilosc_obrazow === 0 ) {
+			// pobierz wszystkie obrazy
 			$query = $this->db->get('obrazy');
 		} else {
-			$query = $this->db->get('obrazy', $ilosc_obrazow);
+			$query = $this->db->get('obrazy', $ilosc_obrazow, $offset);
 		}
 		
 		$return_array = $this->dodaj_autora_do_tabeli( $query->result_array() );
