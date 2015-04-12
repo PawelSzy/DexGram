@@ -1,5 +1,5 @@
 <?php 
-
+Header("Content-Type: application/x-javascript; charset=UTF-8");
 
 	class pobierz_info_o_obrazie_JSON extends CI_Controller
 	{
@@ -24,12 +24,14 @@
 			} 
 			elseif ($page_name== "offset") 
 			{
-	 			$obrazy = $this->obrazy->pobierz_obrazy($ilosc_nowych_obrazow, $offset);
+				//pobierz obrazy zaczynajac od pewnej wartosc
+	 			$obrazy = $this->obrazy->pobierz_obrazy( $ilosc_nowych_obrazow, $offset );
 	 			echo  json_encode( $obrazy );
 			}
 			else {
-	 			$obrazy = $this->obrazy->pobierz_obraz($page_name);
-	 			echo  json_encode( $obrazy );
+				//pobierz pojedynczy obraz
+	 			$obrazy = $this->obrazy->pobierz_obraz( $page_name );
+	 			echo  json_encode( $obrazy ); 
 			}
 
 

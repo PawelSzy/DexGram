@@ -220,7 +220,8 @@ $(document).ready(function(){
 	    		
 	    		var offset = iloscObrazowNaGlownej.toString(); 
 	    		//console.log("offset"+offset);
-	    		var getJSON_URL = base_url + url_do_JSON +"/offset/" + offset +"/" + ilosc_nowych_obrazow;
+	    		var getJSON_URL = base_url + url_do_JSON +"offset/" + offset +"/" + ilosc_nowych_obrazow.toString();
+	    		console.log("JSURL "+getJSON_URL);
 	    		$.getJSON(getJSON_URL, function(data){
 	    			console.log(data);
 	    			wyswietl_obrazy(data);
