@@ -24,6 +24,7 @@ trait wyswietl_tresc_trait {
 			$this->parser->parse('content', $data);
 			$this->load->view('stopka');
 			$this->load->view('body_end');
+			$this->load->view("javascript");
 		}
 
 
