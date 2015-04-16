@@ -79,6 +79,7 @@ $(document).ready(function(){
 		console.log("glowna_strona");
 
 		$.getJSON(base_url + url_do_JSON, function(data){
+		console.log(data);
 		wyswietl_obrazy(data);
 	}).fail(function( jqxhr, textStatus, error ) {
                     var err = textStatus + ', ' + error;
