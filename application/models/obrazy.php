@@ -46,15 +46,15 @@ class Obrazy extends CI_Model
 		return $query->result_array()[0]['id_autora'];
 	}
 
-	public function pobierz_tytuly()
-	{
-		$this->db->order_by("data", "desc"); 
-		$this->db->select('tytul, autor_id');
-		$query = $this->db->get('artykuly');
+	// public function pobierz_tytuly()
+	// {
+	// 	$this->db->order_by("data", "desc"); 
+	// 	$this->db->select('tytul, autor_id');
+	// 	$query = $this->db->get('artykuly');
 
-		$return_array = $this->dodaj_autora_do_tabeli( $query->result_array() );
-		return $return_array;		
-	}	
+	// 	$return_array = $this->dodaj_autora_do_tabeli( $query->result_array() );
+	// 	return $return_array;		
+	// }	
 
 
 	public function zapisz( $dane )
@@ -63,14 +63,14 @@ class Obrazy extends CI_Model
 		return $this->db->insert_id();
 	}
 
-	public function zmien_dane($dane)
-	{
-		$stary_tytul = urldecode(  $dane['stary_tytul'] );
-		$autor_id =  $dane['obraz']['autor_id'];
-		$where_array = array('autor_id' => $autor_id, 'tytul' => $stary_tytul);
-		$this->db->where($where_array);
-		$this->db->update('obrazy', $dane['obraz']);
-	}
+	// public function zmien_dane($dane)
+	// {
+	// 	$stary_tytul = urldecode(  $dane['stary_tytul'] );
+	// 	$autor_id =  $dane['obraz']['autor_id'];
+	// 	$where_array = array('autor_id' => $autor_id, 'tytul' => $stary_tytul);
+	// 	$this->db->where($where_array);
+	// 	$this->db->update('obrazy', $dane['obraz']);
+	// }
 
 	public function usun_obraz( $nazwa_pliku ) 
 	{
