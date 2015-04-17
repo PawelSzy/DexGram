@@ -2,12 +2,11 @@
 
 
 -------------------------
-Przeniesc kod do oddzielnego pliku
-Pobierz nowe dane przy skrolowaniu
-	zapisuje plik z polskimi literami
 
-$(window).scroll(function() {
-    if($(window).scrollTop() == $(document).height() - $(window).height()) {
-           // ajax call get data from server and append to the div
-    }
-});
+Przeniesc na inny serwer 
+Inna kolorystyka
+Popraw baze danych
+
+
+
+	zapisuje plik z polskimi literami

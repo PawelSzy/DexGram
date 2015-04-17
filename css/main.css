@@ -111,15 +111,15 @@ h1 a {
   background: linear-gradient(to bottom right, #DCDDDE, #E0E1E2); 
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:800px) {
   .nav {
     width: 100%;
-    order: 2;
+    order: 1;
    }
 
   .kolumna {
     width: 100%;
-    order 1;
+    order 2;
   } 
 
   #tresc {
@@ -129,7 +129,7 @@ h1 a {
 }
 
 
-@media screen and (min-width:501px) {
+@media screen and (min-width:801px) {
 .nav {
   width: 20%;
     order: 0;
@@ -138,12 +138,17 @@ h1 a {
   .kolumna {
    width: 2%;
    background-color:  #F2F2F2;
-   order 1;
+   order 2;
   } 
 
   #tresc {
     width: 68%;
-    order: 2;
+    order: 1;
+  }
+
+  .przycisk {
+    margin-left: auto;
+    margin-right: auto;
   }
 
 }
@@ -155,6 +160,7 @@ h1 a {
   }
 
 }
+
 .stopka {
 
   font-size: 0.8em;
@@ -177,7 +183,7 @@ h1 a {
   color: white;
   /*font-family:  'Open Sans: 300', 'Source Sans Pro',"HelveticaNeue-Light" ,  "Helvetica", Arial, sans-serif;  */ 
   margin: 0.25em;
-  margin-left: 1em;
+  margin-left: 1em; 
   padding: 0.25em;
 }
 
